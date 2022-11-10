@@ -1,7 +1,12 @@
 import "./App.css";
-
-function App() {
-  return <div></div>;
+import Navbar from "./components/Navbar";
+import Router from "./Router";
+export default function App() {
+  return (
+    <div className="main-container">
+      <Navbar />
+      <Router />
+    </div>
+  );
 }
 
-export default App;
