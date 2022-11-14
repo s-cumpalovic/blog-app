@@ -1,5 +1,6 @@
 import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
+import AddPost from "./pages/AddPost";
 import AppPosts from "./pages/AppPosts";
 import AppSinglePost from "./pages/AppSinglePost";
 
@@ -12,6 +13,9 @@ export default function Router() {
       </Route>
       <Route path="/posts/:id">
         <AppSinglePost />
+      </Route>
+      <Route path="/add">
+        <AddPost />
       </Route>
     </Switch>
   );

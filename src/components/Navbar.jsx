@@ -7,6 +7,9 @@ export default function Navbar() {
         <li className="nav-li">
           <Link to="/posts">Posts</Link>
         </li>
+        <li className="nav-li">
+          <Link to="/add">Add post</Link>
+        </li>
       </ul>
     </div>
   );

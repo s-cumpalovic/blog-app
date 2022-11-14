@@ -10,6 +10,11 @@ class PostsService {
     const response = await axiosObj.get(`/posts/${id}`);
     return response;
   }
+
+  async post(obj) {
+    const response = await axiosObj.post("/posts", obj);
+    return response;
+  }
 }
 
 export default new PostsService();
