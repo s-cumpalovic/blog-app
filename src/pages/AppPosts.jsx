@@ -25,6 +25,7 @@ export default function AppPosts() {
           <div key={post.id}>
             <PostComponent title={post.title} />
             <Link to={`/posts/${post.id}`}>View post</Link>
+            <Link to={`/edit/${post.id}`}>Edit post</Link>
           </div>
         ))}
     </div>

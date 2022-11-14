@@ -15,6 +15,11 @@ class PostsService {
     const response = await axiosObj.post("/posts", obj);
     return response;
   }
+
+  async edit(id, obj) {
+    const response = await axiosObj.put(`/posts/${id}`, obj);
+    return response;
+  }
 }
 
 export default new PostsService();

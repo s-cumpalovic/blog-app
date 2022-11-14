@@ -1,6 +1,7 @@
 import React from "react";
 
 export default function FormComponent({
+  id,
   handleSubmit,
   onSubmit,
   register,
@@ -8,7 +9,7 @@ export default function FormComponent({
 }) {
   return (
     <div>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={(e) => handleSubmit(onSubmit)(e)}>
         <input
           type="text"
           {...register("title", { required: true, minLength: 2 })}
@@ -17,7 +18,7 @@ export default function FormComponent({
           type="text"
           {...register("text", { required: true, maxLength: 300 })}
         />
-        <button type="submit">Add post</button>
+        <button type="submit">{id ? "Edit post" : "Add post"}</button>
       </form>
       <button onClick={() => reset()}>Reset form</button>
     </div>

@@ -14,6 +14,9 @@ export default function Router() {
       <Route path="/posts/:id">
         <AppSinglePost />
       </Route>
+      <Route path="/edit/:id">
+        <AddPost />
+      </Route>
       <Route path="/add">
         <AddPost />
       </Route>
