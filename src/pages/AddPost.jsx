@@ -1,16 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import FormComponent from "../components/FormComponents.jsx/FormComponent";
+import PostFormComponent from "../components/FormComponents.jsx/PostFormComponent";
 import PostsService from "../services/PostsService";
 import { useHistory, useParams } from "react-router-dom";
 
 export default function AddPost() {
-  const [singlePost, setSinglePost] = useState();
   const { handleSubmit, register, reset, setValue } = useForm();
   const history = useHistory();
   const { id } = useParams();
 
-  console.log(handleSubmit);
   useEffect(() => {
     handleSinglePost();
   }, []);
@@ -41,7 +39,7 @@ export default function AddPost() {
   };
 
   return (
-    <FormComponent
+    <PostFormComponent
       id={id}
       handleSubmit={handleSubmit}
       onSubmit={handleSubmitForm}

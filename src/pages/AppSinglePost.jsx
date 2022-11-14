@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import CommentFormComponent from "../components/FormComponents.jsx/CommentFormComponent";
 import PostComponent from "../components/PostsComponents/PostComponent";
 import PostsService from "../services/PostsService";
 
 export default function AppSinglePost() {
   const { id } = useParams();
   const [singlePost, setSinglePost] = useState();
+  const { handleSubmit, register, reset } = useForm();
 
   useEffect(() => {
     handleGetSinglePost();
@@ -20,11 +23,29 @@ export default function AppSinglePost() {
     }
   };
 
+  const handleSubmitComment = async (formValues) => {
+    const response = await PostsService.addComment(formValues, singlePost.id);
+    if (response.status === 200) {
+      alert("Comment added!");
+      reset();
+    }
+  };
+
   if (singlePost) {
     return (
-      <div key={singlePost.id}>
-        <PostComponent {...singlePost} />
-      </div>
+      <>
+        <div key={singlePost.id}>
+          <PostComponent {...singlePost} />
+        </div>
+        <div>
+          <CommentFormComponent
+            id={id}
+            handleSubmit={handleSubmit}
+            onSubmit={handleSubmitComment}
+            register={register}
+          />
+        </div>
+      </>
     );
   }
 }
