@@ -20,6 +20,11 @@ class PostsService {
     const response = await axiosObj.put(`/posts/${id}`, obj);
     return response;
   }
+
+  async delete(id) {
+    const response = await axiosObj.delete(`/posts/${id}`);
+    return response;
+  }
 }
 
 export default new PostsService();

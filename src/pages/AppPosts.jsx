@@ -17,6 +17,13 @@ export default function AppPosts() {
     }
   };
 
+  const handleDeletePost = async (id) => {
+    const response = await PostsService.delete(id);
+    if (response.status === 200) {
+      setPosts([...posts.filter((post) => post.id !== id)]);
+    }
+  };
+
   return (
     <div className="posts-container">
       <h1>Blog posts:</h1>
@@ -26,6 +33,7 @@ export default function AppPosts() {
             <PostComponent title={post.title} />
             <Link to={`/posts/${post.id}`}>View post</Link>
             <Link to={`/edit/${post.id}`}>Edit post</Link>
+            <button onClick={() => handleDeletePost(post.id)}>Delete post</button>
           </div>
         ))}
     </div>
