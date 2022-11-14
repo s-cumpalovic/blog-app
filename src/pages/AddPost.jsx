@@ -5,7 +5,7 @@ import PostsService from "../services/PostsService";
 import { useHistory } from "react-router-dom";
 
 export default function AddPost() {
-  const { handleSubmit, register } = useForm();
+  const { handleSubmit, register, reset } = useForm();
   const history = useHistory();
 
   const handleSubmitForm = async (formValues) => {
@@ -19,8 +19,9 @@ export default function AddPost() {
 
   return (
     <FormComponent
-      register={register}
       handleSubmit={() => handleSubmit(handleSubmitForm)}
+      register={register}
+      reset={reset}
     />
   );
 }
