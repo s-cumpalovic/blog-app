@@ -1,6 +1,8 @@
 import React from "react";
 
 export default function CommentFormComponent({
+  id,
+  commentId,
   onSubmit,
   handleSubmit,
   register,
@@ -9,7 +11,9 @@ export default function CommentFormComponent({
     <div>
       <form onSubmit={(e) => handleSubmit(onSubmit)(e)}>
         <input type="text" {...register("text", { required: true })} />
-      <button type="submit">Post comment</button>
+        <button type="submit">
+          {id && commentId ? "Save comment" : "Add comment"}
+        </button>
       </form>
     </div>
   );

@@ -30,7 +30,6 @@ export default function AddPost() {
   const handleSinglePost = async () => {
     if (id) {
       const response = await PostsService.get(id);
-      console.log(response.data);
       if (response.status === 200) {
         reset({ ...response.data });
       }

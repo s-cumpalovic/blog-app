@@ -11,7 +11,7 @@ export default function Router() {
       <Route exact path="/posts">
         <AppPosts />
       </Route>
-      <Route path="/posts/:id">
+      <Route exact path="/posts/:id">
         <AppSinglePost />
       </Route>
       <Route path="/edit/:id">
@@ -19,6 +19,9 @@ export default function Router() {
       </Route>
       <Route path="/add">
         <AddPost />
+      </Route>
+      <Route path="/posts/:id/edit/:commentId">
+        <AppSinglePost />
       </Route>
     </Switch>
   );

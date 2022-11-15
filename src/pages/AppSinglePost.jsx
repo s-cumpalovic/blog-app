@@ -4,14 +4,16 @@ import { useForm } from "react-hook-form";
 import CommentFormComponent from "../components/FormComponents.jsx/CommentFormComponent";
 import SinglePostComponent from "../components/PostsComponents/SinglePostComponent";
 import PostsService from "../services/PostsService";
+import { Link } from "react-router-dom";
 
 export default function AppSinglePost() {
-  const { id } = useParams();
+  const { id, commentId } = useParams();
   const [singlePost, setSinglePost] = useState();
   const { handleSubmit, register, reset } = useForm();
 
   useEffect(() => {
     handleGetSinglePost();
+    handleGetComment();
   }, []);
 
   const handleGetSinglePost = async () => {
@@ -24,13 +26,25 @@ export default function AppSinglePost() {
   };
 
   const handleSubmitComment = async (formValues) => {
-    const response = await PostsService.addComment(formValues, singlePost.id);
-    if (response.status === 200) {
-      alert("Comment added!");
-      setSinglePost({
-        ...singlePost,
-        comments: [...singlePost.comments, formValues],
-      });
+    let response = {};
+
+    if (commentId) {
+      response = await PostsService.editComment(commentId, formValues);
+      if (response.status === 200) {
+        setSinglePost({
+          ...singlePost,
+          comments: [...singlePost.comments, formValues],
+        });
+      }
+    } else {
+      response = await PostsService.addComment(formValues, singlePost.id);
+      if (response.status === 200) {
+        setSinglePost({
+          ...singlePost,
+          comments: [...singlePost.comments, formValues],
+        });
+        reset();
+      }
     }
   };
 
@@ -46,6 +60,15 @@ export default function AppSinglePost() {
     }
   };
 
+  const handleGetComment = async () => {
+    if (commentId) {
+      const response = await PostsService.getComment(commentId);
+      if (response.status === 200) {
+        reset({ ...response.data });
+      }
+    }
+  };
+
   if (singlePost) {
     return (
       <>
@@ -57,11 +80,15 @@ export default function AppSinglePost() {
                 <button onClick={() => handleDeleteComment(comment.id)}>
                   Delete comment
                 </button>
+                <Link to={`/posts/${singlePost.id}/edit/${comment.id}`}>
+                  Edit comment
+                </Link>
               </div>
             ))}
         </div>
         <div>
           <CommentFormComponent
+            commentId={commentId}
             id={id}
             handleSubmit={handleSubmit}
             onSubmit={handleSubmitComment}

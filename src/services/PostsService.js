@@ -18,8 +18,8 @@ class PostsService {
     return response;
   }
 
-  async edit(id, obj) {
-    const response = await axiosObj.put(`/posts/${id}`, obj);
+  async edit(id, post) {
+    const response = await axiosObj.put(`/posts/${id}`, post);
     return response;
   }
 
@@ -39,7 +39,17 @@ class PostsService {
   }
 
   async deleteComment(id) {
-    const response = await axiosObj.delete(`/comments/${id}`)
+    const response = await axiosObj.delete(`/comments/${id}`);
+    return response;
+  }
+
+  async getComment(id) {
+    const response = await axiosObj.get(`/comments/${id}`);
+    return response;
+  }
+
+  async editComment(id, comment) {
+    const response = await axiosObj.put(`/comments/${id}`, comment);
     return response;
   }
 }
