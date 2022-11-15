@@ -1,7 +1,7 @@
 import React from "react";
 import { useFormattedDate } from "../../hooks/useFormattedDate";
 
-export default function SinglePostComponent(post) {
+export default function SinglePostComponent(post, onAlertComment) {
   const formattedDate = useFormattedDate(post.createdAt, "dd-MMMM-yyyy hh:mm"); // Example of format: /15. November 2022 - 11:05
   return (
     <div key={post.id}>
@@ -11,7 +11,11 @@ export default function SinglePostComponent(post) {
         post.comments.map((comment) => (
           <div key={comment.id}>
             <ul>
-              <li key={comment.id}>{comment.text}</li>
+              <li key={comment.id}>
+                <p onClick={() => onAlertComment}>
+                {comment.text}
+                </p>
+                </li>
             </ul>
           </div>
         ))}

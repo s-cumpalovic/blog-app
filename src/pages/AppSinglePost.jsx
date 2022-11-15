@@ -69,11 +69,26 @@ export default function AppSinglePost() {
     }
   };
 
+  const handleAlertComment = async () => {
+    console.log("klikcem");
+    if (commentId) {
+      const response = await PostsService.getComment(commentId);
+
+      if (response.status === 200) {
+        const comment = JSON.stringify(response.data, null, 2);
+        alert(comment);
+      }
+    }
+  };
+
   if (singlePost) {
     return (
       <>
         <div key={singlePost.id}>
-          <SinglePostComponent {...singlePost} />
+          <SinglePostComponent
+            {...singlePost}
+            onAlertComment={handleAlertComment}
+          />
           {singlePost.comments &&
             singlePost.comments.map((comment) => (
               <div key={comment.id}>
