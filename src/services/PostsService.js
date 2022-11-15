@@ -37,6 +37,11 @@ class PostsService {
     const response = await axiosObj.get(`/posts/${postId}/comments/count`);
     return response;
   }
+
+  async deleteComment(id) {
+    const response = await axiosObj.delete(`/comments/${id}`)
+    return response;
+  }
 }
 
 export default new PostsService();

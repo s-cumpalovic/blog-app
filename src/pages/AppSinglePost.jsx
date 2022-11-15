@@ -27,7 +27,22 @@ export default function AppSinglePost() {
     const response = await PostsService.addComment(formValues, singlePost.id);
     if (response.status === 200) {
       alert("Comment added!");
-      reset();
+      setSinglePost({
+        ...singlePost,
+        comments: [...singlePost.comments, formValues],
+      });
+    }
+  };
+
+  const handleDeleteComment = async (id) => {
+    const response = await PostsService.deleteComment(id);
+    if (response.status === 200) {
+      setSinglePost({
+        ...singlePost,
+        comments: [
+          ...singlePost.comments.filter((comment) => comment.id !== id),
+        ],
+      });
     }
   };
 
@@ -36,9 +51,14 @@ export default function AppSinglePost() {
       <>
         <div key={singlePost.id}>
           <SinglePostComponent {...singlePost} />
-          {singlePost.comments && (
-            <p>Number of comments: {singlePost.comments.length}</p>
-          )}
+          {singlePost.comments &&
+            singlePost.comments.map((comment) => (
+              <div key={comment.id}>
+                <button onClick={() => handleDeleteComment(comment.id)}>
+                  Delete comment
+                </button>
+              </div>
+            ))}
         </div>
         <div>
           <CommentFormComponent
