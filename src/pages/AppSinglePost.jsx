@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import CommentFormComponent from "../components/FormComponents.jsx/CommentFormComponent";
-import PostComponent from "../components/PostsComponents/PostComponent";
+import SinglePostComponent from "../components/PostsComponents/SinglePostComponent";
 import PostsService from "../services/PostsService";
 
 export default function AppSinglePost() {
@@ -12,7 +12,7 @@ export default function AppSinglePost() {
 
   useEffect(() => {
     handleGetSinglePost();
-  });
+  }, []);
 
   const handleGetSinglePost = async () => {
     if (id) {
@@ -35,7 +35,7 @@ export default function AppSinglePost() {
     return (
       <>
         <div key={singlePost.id}>
-          <PostComponent {...singlePost} />
+          <SinglePostComponent {...singlePost} />
           {singlePost.comments && (
             <p>Number of comments: {singlePost.comments.length}</p>
           )}
