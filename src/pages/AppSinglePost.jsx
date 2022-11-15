@@ -36,6 +36,9 @@ export default function AppSinglePost() {
       <>
         <div key={singlePost.id}>
           <PostComponent {...singlePost} />
+          {singlePost.comments && (
+            <p>Number of comments: {singlePost.comments.length}</p>
+          )}
         </div>
         <div>
           <CommentFormComponent

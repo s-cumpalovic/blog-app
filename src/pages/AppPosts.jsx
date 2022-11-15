@@ -5,10 +5,9 @@ import { Link } from "react-router-dom";
 
 export default function AppPosts() {
   const [posts, setPosts] = useState();
-
   useEffect(() => {
     handleGetPosts();
-  }, []);
+  });
 
   const handleGetPosts = async () => {
     const response = await PostsService.getAll();
@@ -16,6 +15,13 @@ export default function AppPosts() {
       setPosts(response.data);
     }
   };
+
+  // const handleGetCommentCount = async (id) => {
+  //   const response = await PostsService.getCommentCount(id);
+  //   if (response.status === 200) {
+  //     return response.data.count;
+  //   }
+  // };
 
   const handleDeletePost = async (id) => {
     const response = await PostsService.delete(id);
@@ -33,7 +39,9 @@ export default function AppPosts() {
             <PostComponent title={post.title} />
             <Link to={`/posts/${post.id}`}>View post</Link>
             <Link to={`/edit/${post.id}`}>Edit post</Link>
-            <button onClick={() => handleDeletePost(post.id)}>Delete post</button>
+            <button onClick={() => handleDeletePost(post.id)}>
+              Delete post
+            </button>
           </div>
         ))}
     </div>

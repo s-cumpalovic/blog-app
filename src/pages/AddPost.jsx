@@ -11,7 +11,7 @@ export default function AddPost() {
 
   useEffect(() => {
     handleSinglePost();
-  }, []);
+  });
 
   const handleSubmitForm = async (formValues) => {
     let response = {};
@@ -28,7 +28,6 @@ export default function AddPost() {
   };
 
   const handleSinglePost = async () => {
-    console.log(id);
     if (id) {
       const response = await PostsService.get(id);
       console.log(response.data);

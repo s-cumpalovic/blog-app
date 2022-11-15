@@ -7,7 +7,9 @@ class PostsService {
   }
 
   async get(id) {
-    const response = await axiosObj.get(`/posts/${id}?filter={"include":["comments"]}`);
+    const response = await axiosObj.get(
+      `/posts/${id}?filter={"include":["comments"]}`
+    );
     return response;
   }
 
@@ -27,7 +29,12 @@ class PostsService {
   }
 
   async addComment(comment, postId) {
-    const response = await axiosObj.post(`/posts/${postId}/comments`, comment)
+    const response = await axiosObj.post(`/posts/${postId}/comments`, comment);
+    return response;
+  }
+
+  async getCommentCount(postId) {
+    const response = await axiosObj.get(`/posts/${postId}/comments/count`);
     return response;
   }
 }
